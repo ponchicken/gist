@@ -1,0 +1,38 @@
+.app{
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-areas: 
+    "h h"
+    "s m"
+    "f f";
+}
+
+header,
+aside,
+main,
+footer{
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+header{
+  grid-area: h;
+  background: #a00;
+}
+
+aside{
+  grid-area: s;
+  background: #0a0;
+}
+
+main{
+  grid-area: m;
+  background: #00a;
+}
+
+footer{
+  grid-area: f;
+  background: #aa0;
+}

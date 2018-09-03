@@ -1,3 +1,15 @@
 .app{
   
 }
+
+li.completed{
+  text-decoration: line-through;
+}
+
+.gists-list{
+
+  a{
+    display: block;
+    margin: 5px 0;
+  }
+}
