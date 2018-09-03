@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { getGists, user } from '../api/get'
+// import { getGists, user } from '../api/get'
 
 class Gist extends Component {
 
@@ -11,8 +11,8 @@ class Gist extends Component {
 
   displayGists = (e) => {
     e.preventDefault()
-    user(data => console.log(data))
-    getGists(data => console.log(data))
+    // user(data => console.log(data))
+    // getGists(data => console.log(data))
   }
 
   render() {

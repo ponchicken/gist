@@ -28,17 +28,17 @@ export const toggleTodo = id => ({
 })
 
 export const gistsRequest = user => ({
-  type: gists.GISTS_FETCH_REQUEST,
+  type: gists.FETCH_GISTS_REQUEST,
   user
 })
 
 export const gistsSuccess = list => ({
-  type: gists.GISTS_FETCH_SUCCESS,
+  type: gists.FETCH_GISTS_SUCCESS,
   list
 })
 
 export const gistsFailure = error => ({
-  type: gists.GISTS_FETCH_FAILURE,
+  type: gists.FETCH_GISTS_FAILURE,
   error
 })
 

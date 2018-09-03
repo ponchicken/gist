@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import Gists from './containers/Gists';
 import Gist from './containers/Gist';
 import Login from './containers/Login';
+import Sync from './containers/Sync';
 
 class App extends Component {
 
@@ -28,12 +29,15 @@ class App extends Component {
       <Router>
         <div className="app">
           <header>
-            <Link to="/">home</Link>
-            <Link to="/gist">gist</Link>
-            <Link to="/login">login</Link>
+            <nav>
+              <Link to="/">home</Link>
+              <Link to="/gist">gist</Link>
+              <Link to="/login">login</Link>
+            </nav>
+            <Sync />
           </header>
           <aside>
-            <Gists />
+            {/* <Gists /> */}
           </aside>
           <main>
             <Route exact path="/" render={this.chooseStartPage} />

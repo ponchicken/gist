@@ -9,7 +9,6 @@ const defaultState = {
 }
 
 export function gist(state=defaultState, action) {
-  console.log('action', action.type)
   switch(action.type) {
     case GIST_FETCH_REQUEST:
       return {

@@ -3,6 +3,7 @@ import example from './example'
 import { searchText, showCompleted, todos } from './todo'
 import { gists } from './gists'
 import { gist } from './gist'
+import { user } from './user'
 
 const rootReducer = combineReducers({
   example,
@@ -10,7 +11,8 @@ const rootReducer = combineReducers({
   showCompleted,
   todos,
   gists,
-  gist
+  gist,
+  user
 })
 
 export default rootReducer

@@ -9,6 +9,6 @@ const getData = prepareFetch({
   }
 })
 
-export const user = getData(`/user`)
+export const getUser = getData(`/user`)
 
 export const getGists = getData(`/gists`)

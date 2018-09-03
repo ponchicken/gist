@@ -1,8 +1,8 @@
 import {
-  FETCH_GISTS_REQUEST,
-  FETCH_GISTS_SUCCESS,
-  FETCH_GISTS_FAILURE
-} from '../constants/gists'
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_FAILURE
+} from '../constants/user'
 
 const defaultState = {
   pending: false,
@@ -10,21 +10,21 @@ const defaultState = {
   error: ''
 }
 
-export const gists = (state=defaultState, action) => {
+export const user = (state=defaultState, action) => {
   switch(action.type) {
-    case FETCH_GISTS_REQUEST:
+    case FETCH_USER_REQUEST:
       return {
         ...state,
         pending: true
       }
-    case FETCH_GISTS_SUCCESS:
+    case FETCH_USER_SUCCESS:
       return {
         ...state,
         pending: false,
         data: action.payload,
         error: defaultState.error
       }
-    case FETCH_GISTS_FAILURE:
+    case FETCH_USER_FAILURE:
       return {
         ...state,
         pending: false,
