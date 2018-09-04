@@ -37,7 +37,7 @@ class App extends Component {
             <Sync />
           </header>
           <aside>
-            {/* <Gists /> */}
+            <Gists />
           </aside>
           <main>
             <Route exact path="/" render={this.chooseStartPage} />
@@ -47,7 +47,6 @@ class App extends Component {
           <footer>
             footer
           </footer>
-          {/* <Todo /> */}
         </div>
       </Router>
     );

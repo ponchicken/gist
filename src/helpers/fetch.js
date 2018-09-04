@@ -5,7 +5,6 @@ const makeUrl = path => {
 }
 
 export const prepareFetch = headers => path => () => {
-  console.log(headers)
   return fetch(makeUrl(path), headers)
     .then(res => {
       if (res.ok)

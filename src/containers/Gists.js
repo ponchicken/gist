@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchGists } from '../actions';
-import { gistFetch } from '../actions/gist'
 
 class Gists extends Component {
 
-  componentDidMount() {
-    this.props.loadGists()
+  displayGists = () => {
+    let gists = this.props.gists.data
+    if (gists.length) {
+      return gists.map(gist => {
+        return <a href={gist.url} key={gist.id}>{ gist.description }</a>
+      })
+    } else {
+      return <div>no gists</div>
+    }
   }
 
   render() {
     return (
       <div className="gists-list">
-        {
-          this.props.gists.list.map(gist => {
-            return <a href={gist.url} key={gist.id} onClick={this.props.loadGist(gist.id)}>{ gist.description }</a>
-          })
-        }
+        {this.displayGists()}
       </div>
     )
   }
@@ -27,13 +28,7 @@ const mapState = ({ gists }) => ({
 })
 
 const mapDispatch = dispatch => ({
-  loadGist: id => e => {
-    e.preventDefault()
-    dispatch(gistFetch(id))
-  },
-  loadGists: () => {
-    dispatch(fetchGists('ponchicken'))
-  }
+  
 })
 
 export default connect(mapState, mapDispatch)(Gists)
