@@ -1,10 +1,10 @@
 {
-  "runtime~main.js": "https://ponchicken.github.io/gist/static/js/runtime~main.c2b809d6.js",
-  "runtime~main.js.map": "https://ponchicken.github.io/gist/static/js/runtime~main.c2b809d6.js.map",
-  "vendors.js": "https://ponchicken.github.io/gist/static/js/vendors.45f3b66c.chunk.js",
-  "vendors.js.map": "https://ponchicken.github.io/gist/static/js/vendors.45f3b66c.chunk.js.map",
-  "main.css": "https://ponchicken.github.io/gist/static/css/main.98e1e660.chunk.css",
-  "main.js": "https://ponchicken.github.io/gist/static/js/main.1d8b9d5a.chunk.js",
-  "main.js.map": "https://ponchicken.github.io/gist/static/js/main.1d8b9d5a.chunk.js.map",
-  "index.html": "https://ponchicken.github.io/gist/index.html"
+  "runtime~main.js": "/gist/static/js/runtime~main.b2352c36.js",
+  "runtime~main.js.map": "/gist/static/js/runtime~main.b2352c36.js.map",
+  "vendors.js": "/gist/static/js/vendors.45f3b66c.chunk.js",
+  "vendors.js.map": "/gist/static/js/vendors.45f3b66c.chunk.js.map",
+  "main.css": "/gist/static/css/main.98e1e660.chunk.css",
+  "main.js": "/gist/static/js/main.b65354dd.chunk.js",
+  "main.js.map": "/gist/static/js/main.b65354dd.chunk.js.map",
+  "index.html": "/gist/index.html"
 }
