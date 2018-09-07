@@ -4,8 +4,9 @@ const makeUrl = path => {
   return `${apiUrl}${path}`
 }
 
-export const prepareFetch = headers => path => () => {
-  return fetch(makeUrl(path), headers)
+export const prepareJsonFetch = headers => path => url => {
+  url = url || makeUrl(path)
+  return fetch(url, headers)
     .then(res => {
       if (res.ok)
         return res.json()

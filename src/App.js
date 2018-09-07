@@ -16,7 +16,6 @@ class App extends Component {
         <Gist />
       ) 
     } else {
-      console.log('should redirect')
       return (
         <Gist />
       ) 
@@ -26,13 +25,14 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
+      {/* <Router> */}
         <div className="app">
           <header>
             <nav>
-              <Link to="/">home</Link>
-              <Link to="/gist">gist</Link>
-              <Link to="/login">login</Link>
+              <Link to={'/'}>home</Link>
+              <Link to={'/gist'}>gist</Link>
+              <Link to={'/login'}>login</Link>
             </nav>
             <Sync />
           </header>

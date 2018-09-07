@@ -2,7 +2,10 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://ponchicken.github.io/gist",
   "dependencies": {
+    "gh-pages": "^1.2.0",
+    "localforage": "^1.7.2",
     "node-sass": "^4.9.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
@@ -11,13 +14,16 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.0-next.a671462c",
     "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
     "redux-promise": "^0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "browserslist": {
     "development": [

@@ -19,20 +19,20 @@ footer{
 
 header{
   grid-area: h;
-  background: #a00;
+  background: rgb(75, 44, 44);
 }
 
 aside{
   grid-area: s;
-  background: #0a0;
+  background: rgb(68, 95, 68);
 }
 
 main{
   grid-area: m;
-  background: #00a;
+  background: rgb(45, 45, 92);
 }
 
 footer{
   grid-area: f;
-  background: #aa0;
+  background: rgb(68, 68, 33);
 }

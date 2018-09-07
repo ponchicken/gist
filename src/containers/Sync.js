@@ -8,6 +8,10 @@ import { fetchGists } from '../actions/gists';
 
 class Sync extends Component {
 
+  componentDidMount() {
+    this.props.onFetchData()
+  }
+  
   render() {
     return (
       <div>

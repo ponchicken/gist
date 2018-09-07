@@ -28,7 +28,6 @@ export const gists = (state=defaultState, action) => {
       return {
         ...state,
         pending: false,
-        data: defaultState.data,
         error: action.payload
       }
     default:

@@ -26,16 +26,21 @@ export default class Login extends Component {
   componentDidMount() {
   }
 
-  render() {
+  getCodeFromGh = () => {
     let query = queryString.stringify({
       client_id: '169a193bbe75c0e129d0',
       scope: 'gist'
     })
-    let link = `https://github.com//login/oauth/authorize?${query}`
+    let link = `https://github.com/login/oauth/authorize?${query}`
+    window.location.href = link
+  }
+
+  render() {
     return (
       <div>
-        login
-        <a href={link}>to github</a>
+        login!
+        <button onClick={this.getCodeFromGh}>to gh</button>
+        {/* <a href={link}>to github</a> */}
         <button onClick={this.requestAccess}>request access</button>
       </div>
     )
