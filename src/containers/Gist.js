@@ -9,22 +9,32 @@ import {
 class Gist extends Component {
 
   displayGist = () => {
-    let { gist } = this.props
-    if (!gist.id) {
+    let {
+      gists
+    } = this.props
+    if (!gists.active)
       return 'no active gist'
-    } else {
+    else {
+      let gist = gists.data.find(item => item.id === gists.active)
       return (
         <div>
           <h3>{gist.description}</h3>
           <ul>{Object.keys(gist.files).map(name => {
-            let file = gist.files[name]
-            return <li key={name} onClick={this.props.getFile(file)}>{name}</li>
+            return <li key={name}>
+              {name}
+              <div>
+                {gist.files[name].data}
+              </div>
+            </li>
           })}</ul>
         </div>
       )
     }
   }
 
+  componentDidUpdate() {
+    
+  }
 
 
   render() {
@@ -36,13 +46,13 @@ class Gist extends Component {
   }
 }
 
-const mapState = ({ gist }) => ({
-  gist
+const mapState = ({ gists }) => ({
+  gists
 })
 
 const mapDispatch = dispatch => ({
-  getFile: (file) => e => {
-    dispatch(fetchGistFile(file))
+  loadFile: (data) => e => {
+    dispatch(fetchGistFile(data))
   }
 })
 

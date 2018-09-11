@@ -4,9 +4,14 @@ const makeUrl = path => {
   return `${apiUrl}${path}`
 }
 
-export const prepareJsonFetch = headers => path => url => {
+export const prepareJsonFetch = method => path => url => {
   url = url || makeUrl(path)
-  return fetch(url, headers)
+  return fetch(url, {
+    method,
+    headers: {
+      Authorization: `token ${localStorage.getItem('ghtoken')}`
+    }
+  })
     .then(res => {
       if (res.ok)
         return res.json()

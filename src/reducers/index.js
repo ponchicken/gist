@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import { gists } from './gists'
-import { gist } from './gist'
 import { user } from './user'
+import { login } from './login'
 
 const rootReducer = combineReducers({
   gists,
   user,
-  gist
+  login
 })
 
 export default rootReducer

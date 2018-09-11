@@ -1,14 +1,6 @@
 import { prepareJsonFetch } from './index'
 
-const token = localStorage.getItem('ghtoken')
-const headers = {
-  method: 'GET',
-  headers: {
-    Authorization: `token ${token}`
-  }
-}
-
-const getData = prepareJsonFetch(headers)
+const getData = prepareJsonFetch('GET')
 
 export const getUser = getData(`/user`)
 export const getGists = getData(`/gists`)
