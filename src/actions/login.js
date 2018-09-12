@@ -3,7 +3,7 @@ import {
   FETCH_GH_TOKEN_SUCCESS,
   FETCH_GH_TOKEN_ERROR,
   LOGOUT
-} from '../constans'
+} from '../constant'
 
 import queryString from 'query-string'
 
@@ -29,10 +29,12 @@ export const logout = () => {
   }
 }
 
-export const getGhCode = (dispatch) => {
+export const getGhCode = () => {
+  let redirect_uri = window.location.origin + window.location.pathname
   let query = queryString.stringify({
     client_id: '169a193bbe75c0e129d0',
-    scope: 'gist'
+    scope: 'gist',
+    redirect_uri
   })
   let link = `https://github.com/login/oauth/authorize?${query}`
   window.location.href = link

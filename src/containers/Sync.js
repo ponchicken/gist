@@ -22,7 +22,6 @@ class Sync extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  // onFetchUser: () => fetchUser(dispatch),
   onFetchData: () => {
     fetchUser(dispatch)
     fetchGists(dispatch)

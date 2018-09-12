@@ -1,6 +1,3 @@
-// import { fileRequest } from '../actions/gist';
-
-
 export const setActiveGist = (state, action) => ({
   ...state,
   active: action.payload
@@ -31,4 +28,12 @@ export const fetchGistFileSuccess = (state, action) => {
 
 export const fetchGistFileFailure = (state, action) => {
   return state
+}
+
+export const updateGist = (state, action) => {
+  let newState = {...state}
+  let gist = action.payload
+  let index = state.data.findIndex(item => item.id === gist.id)
+  newState.data[index] = gist
+  return newState
 }

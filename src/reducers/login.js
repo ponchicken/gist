@@ -3,7 +3,7 @@ import {
   FETCH_GH_TOKEN_SUCCESS,
   FETCH_GH_TOKEN_ERROR,
   LOGOUT
-} from '../constans'
+} from '../constant'
 
 
 import { createReducer } from '../helpers/createReducers'

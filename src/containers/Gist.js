@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import GistData from '../components/GistData'
+
 import {
-  fetchGistFile
+  fetchGistFile,
+  updateGist
 } from '../actions/gist'
 
 
@@ -16,26 +19,9 @@ class Gist extends Component {
       return 'no active gist'
     else {
       let gist = gists.data.find(item => item.id === gists.active)
-      return (
-        <div>
-          <h3>{gist.description}</h3>
-          <ul>{Object.keys(gist.files).map(name => {
-            return <li key={name}>
-              {name}
-              <div>
-                {gist.files[name].data}
-              </div>
-            </li>
-          })}</ul>
-        </div>
-      )
+      return <GistData gist={gist} updateGist={this.props.onUpdateGist} />
     }
   }
-
-  componentDidUpdate() {
-    
-  }
-
 
   render() {
     return (
@@ -53,6 +39,10 @@ const mapState = ({ gists }) => ({
 const mapDispatch = dispatch => ({
   loadFile: (data) => e => {
     dispatch(fetchGistFile(data))
+  },
+  onUpdateGist: (gist) => e => {
+    if (e) e.preventDefault()
+    dispatch(updateGist(gist))
   }
 })
 

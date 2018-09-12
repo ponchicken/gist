@@ -5,11 +5,15 @@ import {
   FETCH_GIST_FILE_FAILURE
 } from '../constants/gist'
 
+import {
+  UPDATE_GIST
+} from '../constant'
+
 export const setActiveGist = id => ({
   type: SET_ACTIVE_GIST,
   payload: id
 })
-
+ 
 export const fileRequest = data => ({
   type: FETCH_GIST_FILE_REQUEST,
   payload: data
@@ -23,6 +27,11 @@ export const fileSuccess = data => ({
 export const fileFailure = error => ({
   type: FETCH_GIST_FILE_FAILURE,
   payload: error
+})
+
+export const updateGist = gist => ({
+  type: UPDATE_GIST,
+  payload: gist
 })
 
 export const loadGistFiles = gist => dispatch => {

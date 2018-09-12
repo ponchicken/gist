@@ -35,13 +35,13 @@ class App extends Component {
               <Link to={'/login'}>login</Link>
             </nav>
             <Sync />
+            <Login />
           </header>
           <aside>
             <Gists />
           </aside>
           <main>
             <Route exact path="/" render={this.chooseStartPage} />
-            <Route exact path="/login" component={Login} />
             <Route exact path="/gist" component={Gist} />
           </main>
           <footer>
