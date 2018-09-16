@@ -1,27 +1,29 @@
 import React from 'react'
-import Editor from 'react-simple-code-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
-
+import Editor from 'react-simple-code-editor'
+import Prism from 'prismjs'
 
 export default ({ gist, updateGist, changeFileData, getFileData }) => {
-  console.dir(languages)
+  console.dir(Prism)
   function getFile (filename) {
+    let file = gist.files[filename]
+    let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
+    let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
+       
+
     return (
-      <div key={filename}>
+      <div key={filename} className="gist">
         <h3>{filename}</h3>
         <Editor
+          className="gist-editor"
           value={getFileData(filename)}
           onValueChange={changeFileData(filename)} 
           highlight={code => {
-            console.log(code)
-            return highlight(code, languages.javascript)
+            return Prism.highlight(code, Prism.languages[lang])
           }}
           padding={10}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 12,
+            fontSize: 14,
           }}
         />
       </div>
