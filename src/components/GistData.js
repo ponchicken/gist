@@ -1,32 +1,38 @@
 import React from 'react'
-
-export default ({ gist, updateGist }) => {
-
-  const changeFileData = filename => event => {
-    console.log(event.target.value)
-    gist.files[filename].data = event.target.value
-    // return data
-  }
+import Editor from 'react-simple-code-editor';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
 
 
+export default ({ gist, updateGist, changeFileData, getFileData }) => {
+  console.dir(languages)
   function getFile (filename) {
     return (
       <div key={filename}>
         <h3>{filename}</h3>
-        <textarea 
-          onChange={changeFileData(filename)} 
-          defaultValue={gist.files[filename].data}
-        ></textarea>
+        <Editor
+          value={getFileData(filename)}
+          onValueChange={changeFileData(filename)} 
+          highlight={code => {
+            console.log(code)
+            return highlight(code, languages.javascript)
+          }}
+          padding={10}
+          style={{
+            fontFamily: '"Fira code", "Fira Mono", monospace',
+            fontSize: 12,
+          }}
+        />
       </div>
     )
   }
 
   function getFiles () {
-    return (
-      Object.keys(gist.files).map(filename => {
-        return getFile(filename)
-      })
-    )
+    const result = Object.keys(gist.files).map(filename => {
+      return getFile(filename)
+    })
+    return result
   }
 
   return (

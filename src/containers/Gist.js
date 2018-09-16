@@ -11,6 +11,13 @@ import {
 
 class Gist extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      code: ''
+    }
+  }
+
   displayGist = () => {
     let {
       gists
@@ -18,9 +25,44 @@ class Gist extends Component {
     if (!gists.active)
       return 'no active gist'
     else {
-      let gist = gists.data.find(item => item.id === gists.active)
-      return <GistData gist={gist} updateGist={this.props.onUpdateGist} />
+      this.gist = gists.data.find(item => item.id === gists.active)
+      return <GistData 
+        gist={this.gist} 
+        updateGist={this.props.onUpdateGist}
+        changeFileData={this.changeFileData}
+        changeCode={this.changeCode}
+        getFileData={this.getFileData}
+      />
     }
+  }
+
+  getFileData = filename => {
+    return this.gist.files[filename].data
+  }
+
+  changeFileData = filename => code => {
+    this.setState({ code })
+    this.gist.files[filename].data = code
+  }
+
+  handleKeyboard = (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      switch (String.fromCharCode(e.which).toLowerCase()) {
+        case 's':
+          if (this.gist) this.props.onUpdateGist(this.gist)(e)
+          break;
+        default:
+          break;
+      }
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyboard)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyboard);
   }
 
   render() {
