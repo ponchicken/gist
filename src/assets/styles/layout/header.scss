@@ -1,6 +1,7 @@
-header{
+.header{
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   nav{
     
@@ -8,4 +9,22 @@ header{
       margin: 0 5px;
     }
   }
+
+  &-user{
+    display: flex;
+    align-items: center;
+
+    &-name{
+      display: flex;
+      align-items: center;
+      margin: 0 5px;
+    }
+    &-img{
+      width: 24px;
+      margin: 0 5px;
+      display: block;
+      border-radius: 24px;
+    }
+  }
+  
 }

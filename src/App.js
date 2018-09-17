@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import Todo from './containers/Todo'
 import Gists from './containers/Gists';
 import Gist from './containers/Gist';
@@ -10,30 +10,12 @@ class App extends Component {
 
   isAuthenticated = false
 
-  chooseStartPage = (props) => {
-    if (this.isAuthenticated) {
-      return (
-        <Gist />
-      ) 
-    } else {
-      return (
-        <Gist />
-      ) 
-      // window.location = 'https://github.com/login/oauth/authorize?client_id=169a193bbe75c0e129d0&redirect_uri=/gist'
-    }
-  }
-
   render() {
     return (
       <Router basename={process.env.PUBLIC_URL}>
       {/* <Router> */}
         <div className="app">
-          <header>
-            <nav>
-              <Link to={'/'}>home</Link>
-              <Link to={'/gist'}>gist</Link>
-              <Link to={'/login'}>login</Link>
-            </nav>
+          <header className="header">
             <Sync />
             <Login />
           </header>
@@ -41,8 +23,7 @@ class App extends Component {
             <Gists />
           </aside>
           <main>
-            <Route exact path="/" render={this.chooseStartPage} />
-            <Route exact path="/gist" component={Gist} />
+            <Route exact path="/" component={Gist} />
           </main>
           <footer>
             footer

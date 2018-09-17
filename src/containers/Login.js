@@ -24,8 +24,14 @@ class Login extends Component {
   }
 
   render() {
+    let user = this.props.user.data
     return (
-      <div>
+      <div className="header-user">
+        <a href={user.html_url} className="header-user-name">
+          <img src={user.avatar_url} alt="" className="header-user-img" />
+          { user.login }
+        </a>
+        
         { this.loading() }
         <button onClick={getGhCode}>Login</button>
         <button onClick={this.props.onLogout}>Logout</button>
@@ -34,8 +40,8 @@ class Login extends Component {
   }
 }
 
-const mapState = ({ login }) => ({
-  login
+const mapState = ({ login, user }) => ({
+  login, user
 })
 
 const mapDispatch = dispatch => ({

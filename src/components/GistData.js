@@ -3,7 +3,6 @@ import Editor from 'react-simple-code-editor'
 import Prism from 'prismjs'
 
 export default ({ gist, updateGist, changeFileData, getFileData }) => {
-  console.dir(Prism)
   function getFile (filename) {
     let file = gist.files[filename]
     let filelang = (file.language) ? file.language.toLowerCase() : 'clike'

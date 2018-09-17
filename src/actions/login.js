@@ -46,7 +46,7 @@ export const fetchToken = dispatch => {
   const query = queryString.stringify({
     code: urlParams.code
   })
-  const url = `http://localhost:3000/callback?${query}`
+  const url = `https://server-aenjidvwww.now.sh/callback?${query}`
   dispatch(tokenRequest())
 
   fetch(url)
