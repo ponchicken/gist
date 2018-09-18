@@ -7,6 +7,7 @@ export default ({ gist, updateGist, changeFileData, getFileData }) => {
     let file = gist.files[filename]
     let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
     let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
+    let content = getFileData(filename) || ''
        
 
     return (
@@ -14,7 +15,7 @@ export default ({ gist, updateGist, changeFileData, getFileData }) => {
         <h3>{filename}</h3>
         <Editor
           className="gist-editor"
-          value={getFileData(filename)}
+          value={content}
           onValueChange={changeFileData(filename)} 
           highlight={code => {
             return Prism.highlight(code, Prism.languages[lang])

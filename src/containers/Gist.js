@@ -5,7 +5,7 @@ import GistData from '../components/GistData'
 
 import {
   fetchGistFile,
-  updateGist
+  changeGist
 } from '../actions/gist'
 
 
@@ -37,12 +37,12 @@ class Gist extends Component {
   }
 
   getFileData = filename => {
-    return this.gist.files[filename].data
+    return this.gist.files[filename].content
   }
 
   changeFileData = filename => code => {
     this.setState({ code })
-    this.gist.files[filename].data = code
+    this.gist.files[filename].content = code
   }
 
   handleKeyboard = (e) => {
@@ -84,7 +84,7 @@ const mapDispatch = dispatch => ({
   },
   onUpdateGist: (gist) => e => {
     if (e) e.preventDefault()
-    dispatch(updateGist(gist))
+    dispatch(changeGist(gist))
   }
 })
 

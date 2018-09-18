@@ -4,22 +4,34 @@ const makeUrl = path => {
   return `${apiUrl}${path}`
 }
 
+const headers = {
+    Authorization: `token ${localStorage.getItem('ghtoken')}`
+}
+
 export const prepareJsonFetch = method => path => url => {
   url = url || makeUrl(path)
   return fetch(url, {
-    method,
-    headers: {
-      Authorization: `token ${localStorage.getItem('ghtoken')}`
-    }
-  })
-    .then(res => {
-      if (res.ok)
-        return res.json()
-      else 
-        throw new Err(res)
+      method,
+      headers,
     })
+    .then(response)
 }
 
+export const prepareJsonPost = method => path => body => {
+  return fetch(makeUrl(path), {
+      method,
+      headers,
+      body: JSON.stringify( body ) 
+    })
+    .then(response)
+}
+
+const response = res => {
+  if (res.ok)
+    return res.json()
+  else 
+    throw new Err(res)
+}
 
 function Err(error) {
   this.name = "Error"

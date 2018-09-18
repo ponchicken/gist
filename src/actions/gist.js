@@ -6,8 +6,11 @@ import {
 } from '../constants/gist'
 
 import {
-  UPDATE_GIST
+  CHANGE_GIST,
+  UPDATE_GIST_SUCCESS,
+  UPDATE_GIST_ERROR
 } from '../constant'
+
 
 export const setActiveGist = id => ({
   type: SET_ACTIVE_GIST,
@@ -29,9 +32,19 @@ export const fileFailure = error => ({
   payload: error
 })
 
-export const updateGist = gist => ({
-  type: UPDATE_GIST,
+export const changeGist = gist => ({
+  type: CHANGE_GIST,
   payload: gist
+})
+
+export const updateGistSuccess = gist => ({
+  type: UPDATE_GIST_SUCCESS,
+  payload: gist
+})
+
+export const updateGistError = error => ({
+  type: UPDATE_GIST_ERROR,
+  payload: error
 })
 
 export const loadGistFiles = gist => dispatch => {
@@ -58,4 +71,4 @@ export const fetchGistFile = gist => dispatch => {
       }))
     })
     .catch(error => dispatch(fileFailure(error)))
-} 
+}

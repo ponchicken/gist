@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {
   fetchUser
 } from '../actions/user'
-import { fetchGists } from '../actions/gists';
+import { fetchGists, updateGists } from '../actions/gists';
 
 
 class Sync extends Component {
@@ -15,17 +15,26 @@ class Sync extends Component {
   render() {
     return (
       <div>
-        <button onClick={this.props.onFetchData}>sync</button>       
+        <button onClick={this.props.onFetchData}>pull</button>     
+        <button onClick={this.props.onUpdateGists(this.props.gists)}>push</button>
+        { this.props.gists.patching ? 'updating gists on github' : ''}      
       </div>
     )
   }
 }
 
+const mapState = ({ gists }) => ({
+  gists
+})
+
 const mapDispatch = dispatch => ({
   onFetchData: () => {
     fetchUser(dispatch)
     fetchGists(dispatch)
+  },
+  onUpdateGists: (gists) => () => {
+    dispatch(updateGists(gists))
   }
 })
 
-export default connect(null, mapDispatch)(Sync)
+export default connect(mapState, mapDispatch)(Sync)

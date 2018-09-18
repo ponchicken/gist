@@ -12,7 +12,9 @@ import {
 } from '../constants/gist'
 
 import {
-  UPDATE_GIST
+  CHANGE_GIST,
+  UPDATE_GISTS_START,
+  UPDATE_GISTS_FINISH
 } from '../constant'
 
 import {
@@ -20,7 +22,7 @@ import {
   fetchGistFileRequest,
   fetchGistFileSuccess,
   fetchGistFileFailure,
-  updateGist
+  changeGist
 } from './gist'
 
 import { createReducer } from '../helpers/createReducers'
@@ -49,6 +51,16 @@ const fetchGistsFailure = (state, action) => ({
   error: action.payload
 })
 
+const updateGistsStart = (state) =>({
+  ...state,
+  patching: true
+})
+
+const updateGistsFinish = (state) => ({
+  ...state,
+  patching: false
+})
+
 export const gists = createReducer(defaultState, {
   [FETCH_GISTS_REQUEST]: fetchGistsRequest,
   [FETCH_GISTS_SUCCESS]: fetchGistsSuccess,
@@ -57,6 +69,8 @@ export const gists = createReducer(defaultState, {
   [FETCH_GIST_FILE_REQUEST]: fetchGistFileRequest,
   [FETCH_GIST_FILE_SUCCESS]: fetchGistFileSuccess,
   [FETCH_GIST_FILE_FAILURE]: fetchGistFileFailure,
-  [UPDATE_GIST]: updateGist
+  [CHANGE_GIST]: changeGist,
+  [UPDATE_GISTS_START]: updateGistsStart,
+  [UPDATE_GISTS_FINISH]: updateGistsFinish
 })
 
