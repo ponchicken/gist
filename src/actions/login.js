@@ -49,7 +49,7 @@ export const fetchToken = dispatch => {
   const url = `https://server-aenjidvwww.now.sh/callback?${query}`
   dispatch(tokenRequest())
 
-  fetch(url)
+  return fetch(url)
     .then(res => res.json())
     .then(data => {
       let { access_token, error } = data.token

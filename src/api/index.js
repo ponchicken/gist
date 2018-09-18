@@ -4,15 +4,15 @@ const makeUrl = path => {
   return `${apiUrl}${path}`
 }
 
-const headers = {
+const headers = () => ({
     Authorization: `token ${localStorage.getItem('ghtoken')}`
-}
+})
 
 export const prepareJsonFetch = method => path => url => {
   url = url || makeUrl(path)
   return fetch(url, {
       method,
-      headers,
+      headers: headers(),
     })
     .then(response)
 }

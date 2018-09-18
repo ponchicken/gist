@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 // import Todo from './containers/Todo'
 import Gists from './containers/Gists';
 import Gist from './containers/Gist';
-import Login from './containers/Login';
+import User from './containers/User';
 import Sync from './containers/Sync';
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
         <div className="app">
           <header className="header">
             <Sync />
-            <Login />
+            <User />
           </header>
           <aside>
             <Gists />

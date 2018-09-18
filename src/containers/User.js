@@ -6,8 +6,14 @@ import {
   fetchToken,
   logout
 } from '../actions/login'
+import {
+  fetchUser
+} from '../actions/user'
+import { 
+  fetchGists 
+} from '../actions/gists';
 
-class Login extends Component {
+class User extends Component {
 
   loading = () => {
     if (this.props.login.pending) 
@@ -46,11 +52,18 @@ const mapState = ({ login, user }) => ({
 
 const mapDispatch = dispatch => ({
   onFetchToken: () => {
-    fetchToken(dispatch)
+    fetchToken(dispatch).then(res => {
+      fetchUser(dispatch)
+      fetchGists(dispatch)
+    })
   },
   onLogout: () => {
     dispatch(logout())
-  }
+  },
+  onFetchData: () => {
+    fetchUser(dispatch)
+    fetchGists(dispatch)
+  },
 })
 
-export default connect(mapState, mapDispatch)(Login)
+export default connect(mapState, mapDispatch)(User)
