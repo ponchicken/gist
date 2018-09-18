@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setActiveGist } from '../actions/gist'
+import { parseTitle } from '../helpers/parseTitle'
 
 class Gists extends Component {
 
@@ -8,7 +9,16 @@ class Gists extends Component {
     let gists = this.props.gists.data
     if (gists.length) {
       return gists.map(gist => {
-        return <button onClick={this.props.setGist(gist.id)} key={gist.id}>{gist.changed ? 'U- ': ''}{ gist.description }</button>
+        let name = parseTitle(gist.description)
+        return (
+          <button 
+            onClick={this.props.setGist(gist.id)} 
+            key={gist.id}
+          >
+            { gist.changed ? 'U- ': '' }
+            { name.title }
+          </button>
+        )
       })
     } else {
       return <div>no gists</div>
