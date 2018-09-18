@@ -13,6 +13,8 @@ import {
 
 import {
   CHANGE_GIST,
+  UPDATE_GIST_SUCCESS,
+  UPDATE_GIST_ERROR,
   UPDATE_GISTS_START,
   UPDATE_GISTS_FINISH
 } from '../constant'
@@ -22,7 +24,9 @@ import {
   fetchGistFileRequest,
   fetchGistFileSuccess,
   fetchGistFileFailure,
-  changeGist
+  changeGist,
+  updateGistSuccess,
+  updateGistError
 } from './gist'
 
 import { createReducer } from '../helpers/createReducers'
@@ -71,6 +75,8 @@ export const gists = createReducer(defaultState, {
   [FETCH_GIST_FILE_FAILURE]: fetchGistFileFailure,
   [CHANGE_GIST]: changeGist,
   [UPDATE_GISTS_START]: updateGistsStart,
-  [UPDATE_GISTS_FINISH]: updateGistsFinish
+  [UPDATE_GISTS_FINISH]: updateGistsFinish,
+  [UPDATE_GIST_SUCCESS]: updateGistSuccess,
+  [UPDATE_GIST_ERROR]: updateGistError
 })
 

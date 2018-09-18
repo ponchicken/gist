@@ -8,7 +8,7 @@ class Gists extends Component {
     let gists = this.props.gists.data
     if (gists.length) {
       return gists.map(gist => {
-        return <button onClick={this.props.setGist(gist.id)} key={gist.id}>{ gist.description }</button>
+        return <button onClick={this.props.setGist(gist.id)} key={gist.id}>{gist.changed ? 'U- ': ''}{ gist.description }</button>
       })
     } else {
       return <div>no gists</div>

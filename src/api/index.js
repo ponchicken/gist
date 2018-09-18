@@ -20,7 +20,7 @@ export const prepareJsonFetch = method => path => url => {
 export const prepareJsonPost = method => path => body => {
   return fetch(makeUrl(path), {
       method,
-      headers,
+      headers: headers(),
       body: JSON.stringify( body ) 
     })
     .then(response)

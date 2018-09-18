@@ -38,3 +38,21 @@ export const changeGist = (state, action) => {
   newState.data[index] = gist
   return newState
 }
+
+export const updateGistSuccess = (state, action) => {
+  let newState = {...state}
+  let gist = action.payload
+  gist.changed = false
+  let index = state.data.findIndex(item => item.id === gist.id)
+  newState.data[index] = gist
+  return newState
+}
+
+export const updateGistError = (state, action) => {
+  let newState = {...state}
+  let gist = action.payload
+  gist.changed = false
+  let index = state.data.findIndex(item => item.id === gist.id)
+  newState.data[index] = gist
+  return newState
+}

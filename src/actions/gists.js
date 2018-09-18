@@ -63,7 +63,6 @@ export const loadGistsFiles = gists => dispatch => {
 }
 
 export const updateGists = gists => dispatch => {
-  console.log('updateGists')
   const changedGists = gists.data.filter(gist => gist.changed)
   changedGists.forEach(gist => {
     dispatch(updateGistsStart())
