@@ -5,6 +5,13 @@ import { parseTitle } from '../helpers/parseTitle'
 
 class Gists extends Component {
 
+  chooseGistClass (gist) {
+    let classes = ''
+    classes += (gist.id === this.props.gists.active) ? 'active ' : ''
+    classes += (gist.changed) ? 'changed ' : ''
+    return classes
+  }
+
   displayGists = () => {
     let gists = this.props.gists.data
     if (gists.length) {
@@ -14,8 +21,8 @@ class Gists extends Component {
           <button 
             onClick={this.props.setGist(gist.id)} 
             key={gist.id}
+            className={this.chooseGistClass(gist)}
           >
-            { gist.changed ? 'U- ': '' }
             { name.title }
           </button>
         )

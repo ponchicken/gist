@@ -1,0 +1,33 @@
+.gists{
+
+  &-list{
+
+    button{
+      display: block;
+      background: none;
+      border: none;
+      color: #eee;
+      padding: 5px;
+      transition: all .2s ease;
+      cursor: pointer;
+
+      &:focus{
+        outline: none;
+      }
+      &:hover{
+        color: rgb(255, 163, 163);
+      }
+
+      &.active{
+        color: rgb(125, 187, 245);
+      }
+
+      &.changed{
+        &:before{
+          content: "+ ";
+        }
+      }
+    }
+
+  }
+}
