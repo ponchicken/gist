@@ -14,10 +14,10 @@ class Sync extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={this.props.onFetchData}>pull</button>     
-        <button onClick={this.props.onUpdateGists(this.props.gists)}>push</button>
-        { this.props.gists.patching ? 'updating gists on github' : ''}      
+      <div className="sync">
+        <button className="btn" onClick={this.props.onFetchData}>pull</button>     
+        <button className="btn" onClick={this.props.onUpdateGists(this.props.gists)}>push</button>
+        <div className="status">{ this.props.gists.patching ? 'pushing github' : ''}</div>    
       </div>
     )
   }

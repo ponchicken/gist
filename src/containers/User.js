@@ -39,8 +39,8 @@ class User extends Component {
         </a>
         
         { this.loading() }
-        <button onClick={getGhCode}>Login</button>
-        <button onClick={this.props.onLogout}>Logout</button>
+        <button className="btn" onClick={getGhCode}>Login</button>
+        <button className="btn" onClick={this.props.onLogout}>Logout</button>
       </div>
     )
   }

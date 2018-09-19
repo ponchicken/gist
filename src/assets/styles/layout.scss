@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: grid;
   grid-template-columns: 250px 1fr;
-  grid-template-rows: 80px 1fr 50px;
+  grid-template-rows: 80px 1fr 60px;
   grid-template-areas: 
     "h h"
     "s m"
@@ -19,20 +19,18 @@ footer{
 
 header{
   grid-area: h;
-  background: rgb(75, 44, 44);
+  background: #2c3b4b;
 }
 
 aside{
   grid-area: s;
-  background: rgb(68, 95, 68);
 }
 
 main{
   grid-area: m;
-  background: rgb(45, 45, 92);
 }
 
 footer{
   grid-area: f;
-  background: rgb(68, 68, 33);
+  background: #111;
 }

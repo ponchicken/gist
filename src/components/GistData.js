@@ -11,7 +11,7 @@ export default ({ gist, updateGist, changeFileData, getFileData }) => {
        
 
     return (
-      <div key={filename} className="gist">
+      <div key={filename} className="gist-file">
         <h3>{filename}</h3>
         <Editor
           className="gist-editor"
@@ -38,12 +38,14 @@ export default ({ gist, updateGist, changeFileData, getFileData }) => {
   }
 
   return (
-    <div>
+    <div className="gist">
       <h3>{gist.description}</h3>
       <div>
         {getFiles()}
       </div>
-      <button onClick={updateGist(gist)}>Submit</button>
+      <div className="gist-actions">
+        <button className="btn gist-submit" onClick={updateGist(gist)}>Submit</button>
+      </div>
     </div>
   )
 
