@@ -5,7 +5,8 @@ import GistData from '../components/GistData'
 
 import {
   fetchGistFile,
-  changeGist
+  changeGist,
+  fileAdd
 } from '../actions/gist'
 
 
@@ -32,6 +33,7 @@ class Gist extends Component {
         changeFileData={this.changeFileData}
         changeCode={this.changeCode}
         getFileData={this.getFileData}
+        fileAdd={this.props.onFileAdd}
       />
     }
   }
@@ -85,6 +87,9 @@ const mapDispatch = dispatch => ({
   onUpdateGist: (gist) => e => {
     if (e) e.preventDefault()
     dispatch(changeGist(gist))
+  },
+  onFileAdd: (gist) => {
+    dispatch(fileAdd(gist))
   }
 })
 

@@ -8,7 +8,8 @@ import {
 import {
   CHANGE_GIST,
   UPDATE_GIST_SUCCESS,
-  UPDATE_GIST_ERROR
+  UPDATE_GIST_ERROR,
+  FILE_ADD
 } from '../constant'
 
 
@@ -45,6 +46,11 @@ export const updateGistSuccess = gist => ({
 export const updateGistError = error => ({
   type: UPDATE_GIST_ERROR,
   payload: error
+})
+
+export const fileAdd = (gist) => ({
+  type: FILE_ADD,
+  payload: gist
 })
 
 export const loadGistFiles = gist => dispatch => {

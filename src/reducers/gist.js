@@ -56,3 +56,16 @@ export const updateGistError = (state, action) => {
   newState.data[index] = gist
   return newState
 }
+
+export const fileAdd = (state, action) => {
+  console.log('reducer', action.payload)
+  let newState = {...state}
+  let gist = action.payload
+  gist.files['new'] = {
+    filename: 'new',
+    content: ''
+  }
+  let index = state.data.findIndex(item => item.id === gist.id)
+  newState.data[index] = gist
+  return newState
+}
