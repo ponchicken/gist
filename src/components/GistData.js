@@ -23,8 +23,9 @@ export default class GistData extends Component {
   }
 
   onFileAdd = gist => e => {
-    console.log('Adding file')
     this.props.fileAdd(gist)
+    let newEl = document.querySelector('.gist-file-name[value="new"]')
+    if (newEl) newEl.focus()
   }
 
   render() {

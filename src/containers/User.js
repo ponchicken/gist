@@ -52,10 +52,11 @@ const mapState = ({ login, user }) => ({
 
 const mapDispatch = dispatch => ({
   onFetchToken: () => {
-    fetchToken(dispatch).then(res => {
-      fetchUser(dispatch)
-      fetchGists(dispatch)
-    })
+    fetchToken(dispatch)
+      // .then(res => {
+      //   fetchUser(dispatch)
+      //   fetchGists(dispatch)
+      // })
   },
   onLogout: () => {
     dispatch(logout())
