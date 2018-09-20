@@ -13,7 +13,6 @@ export default class GistData extends Component {
   getFiles () {
     let gist = this.props.gist
     const result = Object.keys(gist.files).map((filename, i) => {
-      console.log('GistData',filename)
       return <GistFile 
         key={i}  
         files={gist.files}

@@ -16,8 +16,9 @@ export default class GistFile extends Component {
   }
 
   componentDidUpdate () {
-    if (this.state.filename !== this.props.filename)
+    if (!this.props.files[this.state.filename]) {
       this.setState(this.getInitialState())
+    }
   }
 
 
