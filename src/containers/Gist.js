@@ -74,7 +74,6 @@ const mapDispatch = dispatch => ({
   },
   onUpdateGist: (gist) => e => {
     if (e) e.preventDefault()
-    console.log(gist)
     dispatch(changeGist(gist))
   },
   onFileAdd: (gist) => {

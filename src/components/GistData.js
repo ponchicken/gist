@@ -1,11 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react'
 import GistFile from './GistFile'
 
-export default ({ gist, updateGist, changeFileData, getFileData, fileAdd }) => {
+export default class GistData extends Component {
+  constructor(props) {
+    super(props)
+    // ({ gist, updateGist, changeFileData, getFileData, fileAdd })
+    this.state = {
+      gist: this.props.gist
+    }
+  }
 
-
-  function getFiles () {
+  getFiles () {
+    let gist = this.props.gist
     const result = Object.keys(gist.files).map((filename, i) => {
+      console.log('GistData',filename)
       return <GistFile 
         key={i}  
         files={gist.files}
@@ -15,22 +23,25 @@ export default ({ gist, updateGist, changeFileData, getFileData, fileAdd }) => {
     return result
   }
 
-  const onFileAdd = gist => e => {
+  onFileAdd = gist => e => {
     console.log('Adding file')
-    fileAdd(gist)
+    this.props.fileAdd(gist)
   }
 
-  return (
-    <div className="gist">
-      <h3>{gist.description}</h3>
-      <div>
-        {getFiles()}
+  render() {
+    let gist = this.props.gist
+    return (
+      <div className="gist">
+        <h3>{gist.description}</h3>
+        <div>
+          {this.getFiles()}
+        </div>
+        <div className="gist-actions">
+          <button className="btn" onClick={this.onFileAdd(gist)}>Add file</button>
+          <button className="btn gist-submit" onClick={this.props.updateGist(gist)}>Submit</button>
+        </div>
       </div>
-      <div className="gist-actions">
-        <button className="btn" onClick={onFileAdd(gist)}>Add file</button>
-        <button className="btn gist-submit" onClick={updateGist(gist)}>Submit</button>
-      </div>
-    </div>
-  )
+    )
+  }
 
 }
