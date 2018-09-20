@@ -1,3 +1,12 @@
+
+// const getNewGistState = (state, action) => cb => {
+//   let newState = {...state}
+//   let gist = action.payload
+//   let index = state.data.findIndex(item => item.id === gist.id)
+//   newState.data[index] = cb(gist)
+//   return newState
+// }
+
 export const setActiveGist = (state, action) => ({
   ...state,
   active: action.payload

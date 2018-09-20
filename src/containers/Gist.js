@@ -30,21 +30,9 @@ class Gist extends Component {
       return <GistData 
         gist={this.gist} 
         updateGist={this.props.onUpdateGist}
-        changeFileData={this.changeFileData}
-        changeCode={this.changeCode}
-        getFileData={this.getFileData}
         fileAdd={this.props.onFileAdd}
       />
     }
-  }
-
-  getFileData = filename => {
-    return this.gist.files[filename].content
-  }
-
-  changeFileData = filename => code => {
-    this.setState({ code })
-    this.gist.files[filename].content = code
   }
 
   handleKeyboard = (e) => {
@@ -86,6 +74,7 @@ const mapDispatch = dispatch => ({
   },
   onUpdateGist: (gist) => e => {
     if (e) e.preventDefault()
+    console.log(gist)
     dispatch(changeGist(gist))
   },
   onFileAdd: (gist) => {
