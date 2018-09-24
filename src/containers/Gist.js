@@ -6,7 +6,8 @@ import GistData from '../components/GistData'
 import {
   fetchGistFile,
   changeGist,
-  fileAdd
+  fileAdd,
+  fileRemove
 } from '../actions/gist'
 
 
@@ -23,7 +24,7 @@ class Gist extends Component {
     let {
       gists
     } = this.props
-    if (!gists.active)
+    if (!gists || !gists.active)
       return 'no active gist'
     else {
       this.gist = gists.data.find(item => item.id === gists.active)
@@ -31,6 +32,7 @@ class Gist extends Component {
         gist={this.gist} 
         updateGist={this.props.onUpdateGist}
         fileAdd={this.props.onFileAdd}
+        fileRemove={this.props.onFileRemove}
       />
     }
   }
@@ -78,6 +80,9 @@ const mapDispatch = dispatch => ({
   },
   onFileAdd: (gist) => {
     dispatch(fileAdd(gist))
+  },
+  onFileRemove: (gist, filename) => {
+    dispatch(fileRemove(gist, filename))
   }
 })
 

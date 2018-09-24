@@ -1,12 +1,12 @@
 .app{
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 200px 1fr;
   grid-template-rows: 80px 1fr 60px;
   grid-template-areas: 
-    "h h"
-    "s m"
-    "f f";
+    " h h"
+    " g m"
+    " f f";
 }
 
 header,
@@ -22,8 +22,11 @@ header{
   background: #2c3b4b;
 }
 
-aside{
-  grid-area: s;
+.side-gists{
+  grid-area: g;
+}
+.side-tags{
+  grid-area: t;
 }
 
 main{

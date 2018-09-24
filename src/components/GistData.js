@@ -17,6 +17,7 @@ export default class GistData extends Component {
         key={i}  
         files={gist.files}
         filename={filename}
+        fileRemove={this.onFileRemove(gist)}
       />
     })
     return result
@@ -28,11 +29,18 @@ export default class GistData extends Component {
     if (newEl) newEl.focus()
   }
 
+  onFileRemove = gist => filename => {
+    this.props.fileRemove(gist, filename)
+  }
+
   render() {
     let gist = this.props.gist
     return (
       <div className="gist">
         <h3>{gist.description}</h3>
+        <div>
+          {Object.keys(this.state.gist.files).map(filename => <div key={filename}>{filename}</div>)}
+        </div>
         <div>
           {this.getFiles()}
         </div>

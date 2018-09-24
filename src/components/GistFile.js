@@ -47,6 +47,12 @@ export default class GistFile extends Component {
     files[filename].content = content
   }
 
+
+  onFileRemove = filename => e => {
+    this.props.fileRemove(filename)
+  }
+
+
   render() {
     let {
       files
@@ -60,7 +66,10 @@ export default class GistFile extends Component {
 
       return (
         <div className="gist-file">
-          <input type="text" className="gist-file-name" value={this.getFilename()} onChange={this.onFilenameChange}/>
+          <div className="gist-file-top">
+            <input type="text" className="gist-file-name" value={this.getFilename()} onChange={this.onFilenameChange}/>
+            <button className="btn" title="remove file" onClick={this.onFileRemove(file.filename)}>x</button>
+          </div>
           <Editor
             className="gist-editor"
             value={content}

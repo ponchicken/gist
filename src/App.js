@@ -19,7 +19,7 @@ class App extends Component {
             <Sync />
             <User />
           </header>
-          <aside>
+          <aside className="side-gists">
             <Gists />
           </aside>
           <main>
