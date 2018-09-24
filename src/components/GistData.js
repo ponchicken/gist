@@ -39,9 +39,6 @@ export default class GistData extends Component {
       <div className="gist">
         <h3>{gist.description}</h3>
         <div>
-          {Object.keys(this.state.gist.files).map(filename => <div key={filename}>{filename}</div>)}
-        </div>
-        <div>
           {this.getFiles()}
         </div>
         <div className="gist-actions">

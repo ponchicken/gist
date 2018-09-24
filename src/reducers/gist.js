@@ -81,8 +81,8 @@ export const fileAdd = (state, action) => {
 
 export const fileRemove = (state, action) => {
   let newState = {...state}
-  let { gist, filename} = action.payload
-  delete gist.files[filename]
+  let { gist, filename } = action.payload
+  gist.files[filename] = null
   let index = state.data.findIndex(item => item.id === gist.id)
   newState.data[index] = gist
   return newState

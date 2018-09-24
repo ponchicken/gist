@@ -5,19 +5,26 @@ import Prism from 'prismjs'
 export default class GistFile extends Component {
   constructor(props) {
     super(props)
-    this.state = this.getInitialState()
+    this.state = this.getDefaultState()
   }
   
-  getInitialState() {
-    return { 
-      filename: this.props.filename,
-      content: this.props.files[this.props.filename].content
+  getDefaultState = () => {
+    if (this.props.files[this.props.filename]) {
+      return { 
+        filename: this.props.filename,
+        content: this.props.files[this.props.filename].content,
+        files: this.props.files
+      }
+    } else {
+      return null
     }
   }
 
   componentDidUpdate () {
-    if (!this.props.files[this.state.filename]) {
-      this.setState(this.getInitialState())
+    if (this.state ) {
+      if (!this.props.files[this.state.filename] && this.props.files[this.state.filename] !== null) {
+        this.setState(this.getDefaultState())
+      }
     }
   }
 
@@ -55,11 +62,14 @@ export default class GistFile extends Component {
 
   render() {
     let {
-      files
+      files,
+      filename
     } = this.props
-    let file = files[this.state.filename]
 
-    if (file) {
+    if (! this.state || files[filename] === null) {
+      return <div>{filename} removed</div>
+    } else if (files[this.state.filename]) {
+      let file = files[this.state.filename]
       let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
       let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
       let content = this.state.content || ''
