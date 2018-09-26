@@ -67,7 +67,6 @@ export const updateGistError = (state, action) => {
 }
 
 export const fileAdd = (state, action) => {
-  console.log('reducer', action.payload)
   let newState = {...state}
   let gist = action.payload
   gist.files['new'] = {

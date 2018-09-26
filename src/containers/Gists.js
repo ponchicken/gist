@@ -19,7 +19,7 @@ class Gists extends Component {
         let name = parseTitle(gist.description)
         return (
           <button 
-            onClick={this.props.setGist(gist.id)} 
+            onClick={this.props.setGist(gist)} 
             key={gist.id}
             className={this.chooseGistClass(gist)}
           >

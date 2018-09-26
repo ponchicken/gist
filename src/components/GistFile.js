@@ -37,8 +37,8 @@ export default class GistFile extends Component {
     let newName = e.target.value
     this.setState({ filename: newName })
     files[this.state.filename].filename = newName
-    files[newName] = files[oldName]
-    delete files[oldName]
+    // files[newName] = files[oldName]
+    // delete files[oldName]
   }
 
   getFilename = () => {
@@ -47,11 +47,10 @@ export default class GistFile extends Component {
 
   onFileContentChange = (content) => {
     let {
-      filename,
       files
     } = this.props
     this.setState({ content })
-    files[filename].content = content
+    files[this.state.filename].content = content
   }
 
 
@@ -59,6 +58,9 @@ export default class GistFile extends Component {
     this.props.fileRemove(filename)
   }
 
+  getIG = e => {
+
+  }
 
   render() {
     let {
@@ -77,8 +79,8 @@ export default class GistFile extends Component {
       return (
         <div className="gist-file">
           <div className="gist-file-top">
-            <input type="text" className="gist-file-name" value={this.getFilename()} onChange={this.onFilenameChange}/>
-            <button className="btn" title="remove file" onClick={this.onFileRemove(file.filename)}>x</button>
+            <input type="text" className="gist-file-name" value={this.getFilename()} onChange={this.onFilenameChange} onClick={this.getIG}/>
+            <button className="gist-file-remove btn" title="remove file" onClick={this.onFileRemove(file.filename)}>remove file</button>
           </div>
           <Editor
             className="gist-editor"

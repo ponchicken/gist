@@ -14,9 +14,9 @@ import {
 } from '../constant'
 
 
-export const setActiveGist = id => ({
+export const setActiveGist = gist => ({
   type: SET_ACTIVE_GIST,
-  payload: id
+  payload: gist
 })
  
 export const fileRequest = data => ({

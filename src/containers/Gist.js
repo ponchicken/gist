@@ -16,7 +16,7 @@ class Gist extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      code: ''
+      code: '',
     }
   }
 
@@ -27,12 +27,13 @@ class Gist extends Component {
     if (!gists || !gists.active)
       return 'no active gist'
     else {
-      this.gist = gists.data.find(item => item.id === gists.active)
+      this.gist = gists.data.find(item => item.id === gists.active.id)
       return <GistData 
         gist={this.gist} 
         updateGist={this.props.onUpdateGist}
         fileAdd={this.props.onFileAdd}
         fileRemove={this.props.onFileRemove}
+        getInitialGist={gists.active}
       />
     }
   }
@@ -41,12 +42,16 @@ class Gist extends Component {
     if (e.ctrlKey || e.metaKey) {
       switch (String.fromCharCode(e.which).toLowerCase()) {
         case 's':
-          if (this.gist) this.props.onUpdateGist(this.gist)(e)
+          if (this.gist) this.updateGist(this.gist)(e)
           break;
         default:
           break;
       }
     }
+  }
+
+  updateGist = gist => e => {
+    this.props.onUpdateGist(gist, this.props.gists.active)(e)
   }
 
   componentDidMount() {
@@ -74,8 +79,19 @@ const mapDispatch = dispatch => ({
   loadFile: (data) => e => {
     dispatch(fetchGistFile(data))
   },
-  onUpdateGist: (gist) => e => {
+  onUpdateGist: (gist, initialGist) => e => {
     if (e) e.preventDefault()
+    console.log(initialGist)
+    // TODO if file in initialGist but not in gist, set it to null
+    let nulledFiles = Object.keys(initialGist.files).filter(filename => !gist.files[filename])
+    // assign null value to initial file names (before filename has been changed) to remove it from github
+    gist.files = {
+      ...gist.files,
+      ...nulledFiles.reduce((acc, cur) => {
+        acc[cur] = null
+        return acc
+      }, {})
+    }
     dispatch(changeGist(gist))
   },
   onFileAdd: (gist) => {

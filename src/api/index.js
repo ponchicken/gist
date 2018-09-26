@@ -18,6 +18,7 @@ export const prepareJsonFetch = method => path => url => {
 }
 
 export const prepareJsonPost = method => path => body => {
+  console.log(body)
   return fetch(makeUrl(path), {
       method,
       headers: headers(),

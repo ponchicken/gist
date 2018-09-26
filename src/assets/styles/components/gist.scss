@@ -9,8 +9,21 @@
   }
   &-file{
     margin: 20px 0;
+    &-top{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &-top:hover{
+      .gist-file-remove{
+        display: block;
+      }
+    }
     &-name{
       margin: 10px 0;
+    }
+    &-remove{
+      display: none;
     }
   }
 }
