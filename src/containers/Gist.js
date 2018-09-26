@@ -76,30 +76,7 @@ const mapState = ({ gists }) => ({
 })
 
 const mapDispatch = dispatch => ({
-  loadFile: (data) => e => {
-    dispatch(fetchGistFile(data))
-  },
-  onUpdateGist: (gist, initialGist) => e => {
-    if (e) e.preventDefault()
-    console.log(initialGist)
-    // TODO if file in initialGist but not in gist, set it to null
-    let nulledFiles = Object.keys(initialGist.files).filter(filename => !gist.files[filename])
-    // assign null value to initial file names (before filename has been changed) to remove it from github
-    gist.files = {
-      ...gist.files,
-      ...nulledFiles.reduce((acc, cur) => {
-        acc[cur] = null
-        return acc
-      }, {})
-    }
-    dispatch(changeGist(gist))
-  },
-  onFileAdd: (gist) => {
-    dispatch(fileAdd(gist))
-  },
-  onFileRemove: (gist, filename) => {
-    dispatch(fileRemove(gist, filename))
-  }
+
 })
 
 export default connect(mapState, mapDispatch)(Gist)
