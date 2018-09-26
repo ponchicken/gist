@@ -1,24 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import GistData from '../components/GistData'
+import GistContent from './GistContent'
 
 import {
-  fetchGistFile,
+  // fetchGistFile,
   changeGist,
-  fileAdd,
-  fileRemove
+  fileAdd
 } from '../actions/gist'
 
-
 class Gist extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      code: '',
-    }
-  }
 
   displayGist = () => {
     let {
@@ -27,14 +18,7 @@ class Gist extends Component {
     if (!gists || !gists.active)
       return 'no active gist'
     else {
-      this.gist = gists.data.find(item => item.id === gists.active.id)
-      return <GistData 
-        gist={this.gist} 
-        updateGist={this.props.onUpdateGist}
-        fileAdd={this.props.onFileAdd}
-        fileRemove={this.props.onFileRemove}
-        getInitialGist={gists.active}
-      />
+      return <GistContent updateGist={this.props.onUpdateGist}/>
     }
   }
 
@@ -42,16 +26,12 @@ class Gist extends Component {
     if (e.ctrlKey || e.metaKey) {
       switch (String.fromCharCode(e.which).toLowerCase()) {
         case 's':
-          if (this.gist) this.updateGist(this.gist)(e)
+          this.props.onUpdateGist(this.props.gists.active)(e)
           break;
         default:
           break;
       }
     }
-  }
-
-  updateGist = gist => e => {
-    this.props.onUpdateGist(gist, this.props.gists.active)(e)
   }
 
   componentDidMount() {
@@ -76,7 +56,13 @@ const mapState = ({ gists }) => ({
 })
 
 const mapDispatch = dispatch => ({
-
+  onUpdateGist: gist => e => {
+    if (e) e.preventDefault()
+    dispatch(changeGist(gist))
+  },
+  onFileAdd: (gist) => {
+    dispatch(fileAdd(gist))
+  }
 })
 
 export default connect(mapState, mapDispatch)(Gist)

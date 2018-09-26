@@ -46,9 +46,9 @@ const mapState = ({ gists }) => ({
 })
 
 const mapDispatch = dispatch => ({
-  setGist: id => e => {
+  setGist: gist => e => {
     e.preventDefault()
-    dispatch(setActiveGist(id))
+    dispatch(setActiveGist(gist))
   },
   loadGistFiles: gist => {
     // let files = gist.files

@@ -18,7 +18,8 @@ import {
   UPDATE_GISTS_START,
   UPDATE_GISTS_FINISH,
   FILE_ADD,
-  FILE_REMOVE
+  FILE_REMOVE,
+  FILE_RENAME
 } from '../constant'
 
 import {
@@ -30,7 +31,8 @@ import {
   updateGistSuccess,
   updateGistError,
   fileAdd,
-  fileRemove
+  fileRemove,
+  fileRename
 } from './gist'
 
 import { createReducer } from '../helpers/createReducers'
@@ -83,6 +85,7 @@ export const gists = createReducer(defaultState, {
   [UPDATE_GIST_SUCCESS]: updateGistSuccess,
   [UPDATE_GIST_ERROR]: updateGistError,
   [FILE_ADD]: fileAdd,
-  [FILE_REMOVE]: fileRemove
+  [FILE_REMOVE]: fileRemove,
+  [FILE_RENAME]: fileRename
 })
 

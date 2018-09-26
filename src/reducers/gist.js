@@ -86,3 +86,12 @@ export const fileRemove = (state, action) => {
   newState.data[index] = gist
   return newState
 }
+
+export const fileRename = (state, action) => {
+  let newState = {...state}
+  let { gist, target, filename } = action.payload
+  gist.files[target].filename = filename
+  let index = state.data.findIndex(item => item.id === gist.id)
+  newState.data[index] = gist
+  return newState
+}

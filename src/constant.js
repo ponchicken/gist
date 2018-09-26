@@ -14,3 +14,4 @@ export const UPDATE_GISTS_FINISH = 'UPDATE_GISTS_FINISH'
 
 export const FILE_ADD = 'FILE_ADD'
 export const FILE_REMOVE = 'FILE_REMOVE'
+export const FILE_RENAME = 'FILE_RENAME'
