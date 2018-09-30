@@ -69,9 +69,10 @@ export const updateGistError = (state, action) => {
 export const fileAdd = (state, action) => {
   let newState = {...state}
   let gist = action.payload
-  gist.files['new'] = {
+  gist.files[`new-${Date.now()}`] = {
     filename: 'new',
-    content: ''
+    content: 'new',
+    isNew: true
   }
   let index = state.data.findIndex(item => item.id === gist.id)
   newState.data[index] = gist
@@ -81,7 +82,12 @@ export const fileAdd = (state, action) => {
 export const fileRemove = (state, action) => {
   let newState = {...state}
   let { gist, filename } = action.payload
-  gist.files[filename] = null
+  let file = gist.files[filename]
+  if (file.isNew) {
+    delete gist.files[filename]
+  } else {
+    gist.files[filename] = null
+  }
   let index = state.data.findIndex(item => item.id === gist.id)
   newState.data[index] = gist
   return newState

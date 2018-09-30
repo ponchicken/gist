@@ -43,6 +43,9 @@ const mapDispatch = dispatch => ({
     dispatch(setActiveGist(gist))
   },
   onUpdateGists: (gists) => () => {
+    // TODO pull (onFetchData) after update
+    // or delete all files with null
+    // should make promise from updateGists
     dispatch(updateGists(gists))
   }
 })

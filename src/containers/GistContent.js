@@ -5,11 +5,21 @@ import { connect } from 'react-redux'
 
 import {
   fileRename,
-  fileRemove
+  fileRemove,
+  fileAdd
 } from '../actions/gist'
 
 class GistContent extends Component {
 
+  fileAdd = e => {
+    let gist = this.props.gists.active
+    console.dir(this.refs.files)
+    setTimeout(() => {
+      let index = this.refs.files.childNodes.length - 1
+      this.refs[`file-${index}`].focus()
+    }, 50)
+    this.props.onFileAdd(gist)
+  }
 
   getFiles () {
     let result
@@ -17,14 +27,16 @@ class GistContent extends Component {
     if (!gist.id) result = <div>no content</div>
     result = Object.keys(gist.files).map((filename, i) => {
       if (gist.files[filename] === null) {
-        return <div key={filename}>{filename} removed</div>
+        return <div key={filename} className="removed" title={`${filename} removed`}></div>
       } else {
         return (
           <div className="gist-file" key={filename}>
             <div className="gist-file-top">
               <input
-                className="gist-file-name"  
-                value={gist.files[filename].filename} 
+                className="gist-file-name"
+                data-name={filename}
+                ref={`file-${i}`}
+                value={gist.files[filename].filename}
                 onChange={this.props.onFileRename(gist, filename)}
               />
               <button 
@@ -45,13 +57,13 @@ class GistContent extends Component {
     return (
       <div className="gist">
         <h3>{this.props.gists.active.description}</h3>
-        <div className="gist-files">
+        <div className="gist-files" ref="files">
           {this.getFiles()}
         </div>
         <div className="gist-actions">
           <button 
             className="btn"
-            // onClick={this.onFileAdd(gist)}
+            onClick={this.fileAdd}
           >Add file</button>
           <button 
             className="btn gist-submit" 
@@ -73,6 +85,9 @@ const mapDispatch = dispatch => ({
   },
   onFileRename: (gist, target) => e => {
     dispatch(fileRename(gist, target, e.target.value))
+  },
+  onFileAdd: (gist, filesRef) => {
+    dispatch(fileAdd(gist))
   }
 })
 
