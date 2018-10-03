@@ -52,6 +52,11 @@ export const updateGistSuccess = (state, action) => {
   let newState = {...state}
   let gist = action.payload
   gist.changed = false
+  Object.keys(gist.files).forEach(key => {
+    if (gist.files[key] === null)
+      delete gist.files[key]
+  })
+
   let index = state.data.findIndex(item => item.id === gist.id)
   newState.data[index] = gist
   return newState

@@ -26,7 +26,10 @@ class Sync extends Component {
           onClick={onFetchData(gists.data.find(gist => gist.id === gists.active.id))}
         >pull</button>     
         <button className="btn" onClick={onUpdateGists(gists)}>push</button>
-        <div className="status">{ this.props.gists.patching ? 'pushing github' : ''}</div>    
+        <div className="status">
+          { this.props.gists.patching ? 'pushing to github..' : ''}
+          { this.props.gists.pending ? 'getting data from github..' : ''}
+        </div>    
       </div>
     )
   }
