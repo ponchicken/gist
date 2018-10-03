@@ -4,18 +4,16 @@ import { connect } from 'react-redux'
 import GistContent from './GistContent'
 
 import {
-  // fetchGistFile,
-  changeGist,
-  fileAdd
+  changeGist
 } from '../actions/gist'
 
 class Gist extends Component {
 
   displayGist = () => {
     let {
-      gists
+      gists, gist
     } = this.props
-    if (!gists || !gists.active)
+    if (!gists || !gist)
       return 'no active gist'
     else {
       return <GistContent updateGist={this.props.onUpdateGist}/>
@@ -26,7 +24,7 @@ class Gist extends Component {
     if (e.ctrlKey || e.metaKey) {
       switch (String.fromCharCode(e.which).toLowerCase()) {
         case 's':
-          this.props.onUpdateGist(this.props.gists.active)(e)
+          this.props.onUpdateGist(this.props.gist)(e)
           break;
         default:
           break;
@@ -51,17 +49,14 @@ class Gist extends Component {
   }
 }
 
-const mapState = ({ gists }) => ({
-  gists
+const mapState = ({ gists, gist }) => ({
+  gists, gist
 })
 
 const mapDispatch = dispatch => ({
   onUpdateGist: gist => e => {
     if (e) e.preventDefault()
     dispatch(changeGist(gist))
-  },
-  onFileAdd: (gist) => {
-    dispatch(fileAdd(gist))
   }
 })
 

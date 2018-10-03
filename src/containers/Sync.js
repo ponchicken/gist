@@ -16,6 +16,7 @@ class Sync extends Component {
   render() {
     let {
       gists,
+      gist,
       onFetchData,
       onUpdateGists
     } = this.props
@@ -23,7 +24,7 @@ class Sync extends Component {
       <div className="sync">
         <button 
           className="btn" 
-          onClick={onFetchData(gists.data.find(gist => gist.id === gists.active.id))}
+          onClick={onFetchData(gist)}
         >pull</button>     
         <button className="btn" onClick={onUpdateGists(gists)}>push</button>
         <div className="status">
@@ -35,8 +36,8 @@ class Sync extends Component {
   }
 }
 
-const mapState = ({ gists }) => ({
-  gists
+const mapState = ({ gists, gist }) => ({
+  gists, gist
 })
 
 const mapDispatch = dispatch => ({

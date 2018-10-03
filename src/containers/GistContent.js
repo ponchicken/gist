@@ -12,21 +12,23 @@ import {
 class GistContent extends Component {
 
   fileAdd = e => {
-    let gist = this.props.gists.active
-    console.dir(this.refs.files)
     setTimeout(() => {
       let index = this.refs.files.childNodes.length - 1
       this.refs[`file-${index}`].focus()
     }, 50)
-    this.props.onFileAdd(gist)
+    this.props.onFileAdd()
   }
 
   getFiles () {
-    let result
-    let gist = this.props.gists.active
-    if (!gist.id) result = <div>no content</div>
-    result = Object.keys(gist.files).map((filename, i) => {
-      if (gist.files[filename] === null) {
+    let gist = this.props.gist
+    if (!gist.id) return <div>no content</div>
+    return Object.keys(gist.files).map((filename, i) => {
+
+      let file = gist.files[filename]
+      // let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
+      // let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
+
+      if (file === null) {
         return <div key={filename} className="removed" title={`${filename} removed`}></div>
       } else {
         return (
@@ -36,27 +38,39 @@ class GistContent extends Component {
                 className="gist-file-name"
                 data-name={filename}
                 ref={`file-${i}`}
-                value={gist.files[filename].filename}
-                onChange={this.props.onFileRename(gist, filename)}
+                value={file.filename}
+                onChange={this.props.onFileRename(filename)}
               />
               <button 
                 className="gist-file-remove btn"
                 title="remove file"
-                onClick={this.props.onFileRemove(gist, filename)}
+                onClick={this.props.onFileRemove(filename)}
               >remove file</button>
             </div>
+            {/* <Editor
+              className="gist-editor"
+              value={file.content}
+              // onValueChange={this.onFileContentChange} 
+              highlight={code => {
+                return Prism.highlight(code, Prism.languages[lang])
+              }}
+              padding={10}
+              style={{
+                fontFamily: '"Fira code", "Fira Mono", monospace',
+                fontSize: 14,
+              }}
+            /> */}
           </div>
         )
       }
     })
-    return result
   }
 
   render() {
-    let gist = this.props.gists.active
+    let gist = this.props.gist
     return (
       <div className="gist">
-        <h3>{this.props.gists.active.description}</h3>
+        <h3>{gist.description}</h3>
         <div className="gist-files" ref="files">
           {this.getFiles()}
         </div>
@@ -75,19 +89,19 @@ class GistContent extends Component {
   }
 }
 
-const mapState = ({ gists }) => ({
-  gists
+const mapState = ({ gists, gist }) => ({
+  gists, gist
 })
 
 const mapDispatch = dispatch => ({
-  onFileRemove: (gist, target) => e => {
-    dispatch(fileRemove(gist, target))
+  onFileRemove: (target) => e => {
+    dispatch(fileRemove(target))
   },
-  onFileRename: (gist, target) => e => {
-    dispatch(fileRename(gist, target, e.target.value))
+  onFileRename: (target) => e => {
+    dispatch(fileRename(target, e.target.value))
   },
-  onFileAdd: (gist, filesRef) => {
-    dispatch(fileAdd(gist))
+  onFileAdd: () => {
+    dispatch(fileAdd())
   }
 })
 

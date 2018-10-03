@@ -1,12 +1,3 @@
-
-// const getNewGistState = (state, action) => cb => {
-//   let newState = {...state}
-//   let gist = action.payload
-//   let index = state.data.findIndex(item => item.id === gist.id)
-//   newState.data[index] = cb(gist)
-//   return newState
-// }
-
 export const setActiveGist = (state, action) => ({
   ...state,
   active: action.payload
@@ -71,38 +62,3 @@ export const updateGistError = (state, action) => {
   return newState
 }
 
-export const fileAdd = (state, action) => {
-  let newState = {...state}
-  let gist = action.payload
-  gist.files[`new-${Date.now()}`] = {
-    filename: 'new',
-    content: 'new',
-    isNew: true
-  }
-  let index = state.data.findIndex(item => item.id === gist.id)
-  newState.data[index] = gist
-  return newState
-}
-
-export const fileRemove = (state, action) => {
-  let newState = {...state}
-  let { gist, filename } = action.payload
-  let file = gist.files[filename]
-  if (file.isNew) {
-    delete gist.files[filename]
-  } else {
-    gist.files[filename] = null
-  }
-  let index = state.data.findIndex(item => item.id === gist.id)
-  newState.data[index] = gist
-  return newState
-}
-
-export const fileRename = (state, action) => {
-  let newState = {...state}
-  let { gist, target, filename } = action.payload
-  gist.files[target].filename = filename
-  let index = state.data.findIndex(item => item.id === gist.id)
-  newState.data[index] = gist
-  return newState
-}

@@ -5,7 +5,6 @@ import {
 } from '../constants/gists'
 
 import {
-  SET_ACTIVE_GIST,
   FETCH_GIST_FILE_REQUEST,
   FETCH_GIST_FILE_SUCCESS,
   FETCH_GIST_FILE_FAILURE
@@ -16,23 +15,16 @@ import {
   UPDATE_GIST_SUCCESS,
   UPDATE_GIST_ERROR,
   UPDATE_GISTS_START,
-  UPDATE_GISTS_FINISH,
-  FILE_ADD,
-  FILE_REMOVE,
-  FILE_RENAME
+  UPDATE_GISTS_FINISH
 } from '../constant'
 
 import {
-  setActiveGist,
   fetchGistFileRequest,
   fetchGistFileSuccess,
   fetchGistFileFailure,
   changeGist,
   updateGistSuccess,
-  updateGistError,
-  fileAdd,
-  fileRemove,
-  fileRename
+  updateGistError
 } from './gist'
 
 import { createReducer } from '../helpers/createReducers'
@@ -75,7 +67,6 @@ export const gists = createReducer(defaultState, {
   [FETCH_GISTS_REQUEST]: fetchGistsRequest,
   [FETCH_GISTS_SUCCESS]: fetchGistsSuccess,
   [FETCH_GISTS_FAILURE]: fetchGistsFailure,
-  [SET_ACTIVE_GIST]: setActiveGist,
   [FETCH_GIST_FILE_REQUEST]: fetchGistFileRequest,
   [FETCH_GIST_FILE_SUCCESS]: fetchGistFileSuccess,
   [FETCH_GIST_FILE_FAILURE]: fetchGistFileFailure,
@@ -84,8 +75,5 @@ export const gists = createReducer(defaultState, {
   [UPDATE_GISTS_FINISH]: updateGistsFinish,
   [UPDATE_GIST_SUCCESS]: updateGistSuccess,
   [UPDATE_GIST_ERROR]: updateGistError,
-  [FILE_ADD]: fileAdd,
-  [FILE_REMOVE]: fileRemove,
-  [FILE_RENAME]: fileRename
 })
 
