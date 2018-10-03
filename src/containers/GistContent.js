@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import Editor from 'react-simple-code-editor'
-// import Prism from 'prismjs'
+import Editor from 'react-simple-code-editor'
+import Prism from 'prismjs'
 
 import {
   fileRename,
   fileRemove,
-  fileAdd
+  fileAdd,
+  fileContentChange
 } from '../actions/gist'
 
 class GistContent extends Component {
@@ -25,12 +26,12 @@ class GistContent extends Component {
     return Object.keys(gist.files).map((filename, i) => {
 
       let file = gist.files[filename]
-      // let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
-      // let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
-
+      
       if (file === null) {
         return <div key={filename} className="removed" title={`${filename} removed`}></div>
       } else {
+        let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
+        let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
         return (
           <div className="gist-file" key={filename}>
             <div className="gist-file-top">
@@ -47,10 +48,10 @@ class GistContent extends Component {
                 onClick={this.props.onFileRemove(filename)}
               >remove file</button>
             </div>
-            {/* <Editor
+            <Editor
               className="gist-editor"
               value={file.content}
-              // onValueChange={this.onFileContentChange} 
+              onValueChange={this.props.onFileContentChange(filename)} 
               highlight={code => {
                 return Prism.highlight(code, Prism.languages[lang])
               }}
@@ -59,7 +60,7 @@ class GistContent extends Component {
                 fontFamily: '"Fira code", "Fira Mono", monospace',
                 fontSize: 14,
               }}
-            /> */}
+            />
           </div>
         )
       }
@@ -102,6 +103,10 @@ const mapDispatch = dispatch => ({
   },
   onFileAdd: () => {
     dispatch(fileAdd())
+  },
+  onFileContentChange: filename => content => {
+    console.log(filename, content)
+    dispatch(fileContentChange(filename, content))
   }
 })
 

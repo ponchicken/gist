@@ -12,7 +12,7 @@ import {
   FILE_ADD,
   FILE_REMOVE,
   FILE_RENAME,
-  CONTENT_CHANGE
+  FILE_CONTENT_CHANGE
 } from '../constant'
 
 
@@ -67,10 +67,10 @@ export const fileRemove = (filename) => ({
   payload: filename
 })
 
-export const contentChange = (gist, content) => ({
-  type: CONTENT_CHANGE,
+export const fileContentChange = (filename, content) => ({
+  type: FILE_CONTENT_CHANGE,
   payload: {
-    gist, content
+    filename, content
   }
 })
 

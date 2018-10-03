@@ -24,7 +24,7 @@ class Sync extends Component {
       <div className="sync">
         <button 
           className="btn" 
-          onClick={onFetchData(gist)}
+          onClick={onFetchData(gists.data.find(activeGist => gist.id === activeGist.id))}
         >pull</button>     
         <button className="btn" onClick={onUpdateGists(gists)}>push</button>
         <div className="status">

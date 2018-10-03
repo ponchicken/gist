@@ -21,4 +21,4 @@ export const FILE_ADD = 'FILE_ADD'
 export const FILE_REMOVE = 'FILE_REMOVE'
 export const FILE_RENAME = 'FILE_RENAME'
 
-export const CONTENT_CHANGE = 'CONTENT_CHANGE'
+export const FILE_CONTENT_CHANGE = 'FILE_CONTENT_CHANGE'
