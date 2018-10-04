@@ -56,6 +56,10 @@ const mapState = ({ gists, gist }) => ({
 const mapDispatch = dispatch => ({
   onUpdateGist: gist => e => {
     if (e) e.preventDefault()
+    Object.keys(gist.files).forEach(key => {
+      let file = gist.files[key]
+      if (file && !file.content) delete gist.files[key]
+    })
     dispatch(changeGist(gist))
   }
 })
