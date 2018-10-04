@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Editor from 'react-simple-code-editor'
-import Prism from 'prismjs'
+import GistFile from '../components/GistFile'
 
 import {
   fileRename,
@@ -12,13 +11,6 @@ import {
 
 class GistContent extends Component {
 
-  fileAdd = e => {
-    setTimeout(() => {
-      let index = this.refs.files.childNodes.length - 1
-      this.refs[`file-${index}`].focus()
-    }, 50)
-    this.props.onFileAdd()
-  }
 
   getFiles () {
     let gist = this.props.gist
@@ -26,43 +18,14 @@ class GistContent extends Component {
     return Object.keys(gist.files).map((filename, i) => {
 
       let file = gist.files[filename]
-      
+
       if (file === null) {
         return <div key={filename} className="removed" title={`${filename} removed`}></div>
       } else {
-        let filelang = (file.language) ? file.language.toLowerCase() : 'clike'
-        let lang = (Prism.languages.hasOwnProperty(filelang)) ? filelang : 'clike'
-        return (
-          <div className="gist-file" key={filename}>
-            <div className="gist-file-top">
-              <input
-                className="gist-file-name"
-                data-name={filename}
-                ref={`file-${i}`}
-                value={file.filename}
-                onChange={this.props.onFileRename(filename)}
-              />
-              <button 
-                className="gist-file-remove btn"
-                title="remove file"
-                onClick={this.props.onFileRemove(filename)}
-              >remove file</button>
-            </div>
-            <Editor
-              className="gist-editor"
-              value={file.content}
-              onValueChange={this.props.onFileContentChange(filename)} 
-              highlight={code => {
-                return Prism.highlight(code, Prism.languages[lang])
-              }}
-              padding={10}
-              style={{
-                fontFamily: '"Fira code", "Fira Mono", monospace',
-                fontSize: 14,
-              }}
-            />
-          </div>
-        )
+        let { onFileRename, onFileRemove, onFileContentChange } = this.props
+        return <GistFile 
+          key={filename}  {...{ file, filename, onFileRename, onFileRemove, onFileContentChange } }
+        />
       }
     })
   }
@@ -78,7 +41,7 @@ class GistContent extends Component {
         <div className="gist-actions">
           <button 
             className="btn"
-            onClick={this.fileAdd}
+            onClick={this.props.onFileAdd}
           >Add file</button>
           <button 
             className="btn gist-submit" 
@@ -101,7 +64,7 @@ const mapDispatch = dispatch => ({
   onFileRename: (target) => e => {
     dispatch(fileRename(target, e.target.value))
   },
-  onFileAdd: () => {
+  onFileAdd: (e) => {
     dispatch(fileAdd())
   },
   onFileContentChange: filename => content => {
