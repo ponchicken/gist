@@ -106,3 +106,17 @@ export const fileRename = (state, action) => {
   newState.data[index] = gist
   return newState
 }
+
+export const gistAdd = (state, action ) => {
+  let newState = {...state}
+  newState.data.push(action.payload)
+  return newState
+}
+
+export const gistDelete = (state, action) => {
+  let newState = {...state}
+  let id = action.payload
+  let index = state.data.findIndex(item => item.id === id)
+  newState.data[index].deleted = true
+  return newState
+}

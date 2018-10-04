@@ -6,13 +6,16 @@ import {
 } from '../constants/gist'
 
 import {
+  NEW_GIST,
   CHANGE_GIST,
   UPDATE_GIST_SUCCESS,
   UPDATE_GIST_ERROR,
   FILE_ADD,
   FILE_REMOVE,
   FILE_RENAME,
-  FILE_CONTENT_CHANGE
+  FILE_CONTENT_CHANGE,
+  GIST_ADD,
+  GIST_DELETE
 } from '../constant'
 
 
@@ -72,6 +75,20 @@ export const fileContentChange = (filename, content) => ({
   payload: {
     filename, content
   }
+})
+
+export const newGist = () => ({
+  type: NEW_GIST
+})
+
+export const gistAdd = (gist) => ({
+  type:  GIST_ADD,
+  payload: gist
+})
+
+export const gistDelete = (id) => ({
+  type: GIST_DELETE,
+  payload: id
 })
 
 export const loadGistFiles = gist => dispatch => {

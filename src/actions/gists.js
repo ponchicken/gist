@@ -14,6 +14,8 @@ import {
   getGists
 } from '../api/get'
 import { patchGist } from '../api/patch'
+import { postAddGist } from '../api/post'
+import { deleteGist } from '../api/delete'
 
 import {
   loadGistFiles,
@@ -62,20 +64,30 @@ export const loadGistsFiles = gists => dispatch => {
   })
 }
 
+const sendDataToGh = (promise, dispatch) => {
+  promise
+    .then(gist => {
+      dispatch(updateGistSuccess(gist))
+    })
+    .catch(ex => {
+      dispatch(updateGistError(ex))
+    })
+    .finally(res => {
+      dispatch(updateGistsFinish())
+    })
+}
+
 export const updateGists = gists => dispatch => {
-  const changedGists = gists.data.filter(gist => gist.changed)
-  changedGists.forEach(gist => {
+  const updatedGists = gists.data.filter(gist => gist.changed || gist.added || gist.deleted)
+  updatedGists.forEach(gist => {
     dispatch(updateGistsStart())
-    patchGist(gist)
-      .then(gist => {
-        dispatch(updateGistSuccess(gist))
-      })
-      .catch(ex => {
-        dispatch(updateGistError(ex))
-      })
-      .finally(res => {
-        dispatch(updateGistsFinish())
-      })
+    if (gist.deleted) {
+      sendDataToGh(deleteGist(gist.id), dispatch)
+    } else if (gist.added) {
+      sendDataToGh(postAddGist(gist), dispatch)
+    } else if (gist.changed) {
+      sendDataToGh(patchGist(gist), dispatch)
+    } 
   })
-  return changedGists
+  return updatedGists
 }

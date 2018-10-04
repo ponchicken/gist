@@ -4,10 +4,21 @@ import { connect } from 'react-redux'
 import GistContent from './GistContent'
 
 import {
-  changeGist
+  changeGist, gistAdd
 } from '../actions/gist'
 
 class Gist extends Component {
+
+  submitHandler = (gist) => e => {
+    if (e) e.preventDefault()
+    if (this.props.gists.data.findIndex(g => {
+      return g.id === gist.id
+    }) !== -1) {
+      this.props.onUpdateGist(gist)
+    } else {
+      this.props.onAddGist(gist)
+    }
+  }
 
   displayGist = () => {
     let {
@@ -16,7 +27,7 @@ class Gist extends Component {
     if (!gists || !gist)
       return 'no active gist'
     else {
-      return <GistContent updateGist={this.props.onUpdateGist}/>
+      return <GistContent updateGist={this.submitHandler}/>
     }
   }
 
@@ -24,7 +35,7 @@ class Gist extends Component {
     if (e.ctrlKey || e.metaKey) {
       switch (String.fromCharCode(e.which).toLowerCase()) {
         case 's':
-          this.props.onUpdateGist(this.props.gist)(e)
+          this.submitHandler(this.props.gist)(e)
           break;
         default:
           break;
@@ -54,13 +65,15 @@ const mapState = ({ gists, gist }) => ({
 })
 
 const mapDispatch = dispatch => ({
-  onUpdateGist: gist => e => {
-    if (e) e.preventDefault()
+  onUpdateGist: gist => {
     Object.keys(gist.files).forEach(key => {
       let file = gist.files[key]
       if (file && !file.content) delete gist.files[key]
     })
     dispatch(changeGist(gist))
+  },
+  onAddGist: gist => {
+    dispatch(gistAdd(gist))
   }
 })
 

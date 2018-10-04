@@ -6,7 +6,8 @@ import {
   fileRename,
   fileRemove,
   fileAdd,
-  fileContentChange
+  fileContentChange,
+  gistDelete
 } from '../actions/gist'
 
 class GistContent extends Component {
@@ -14,7 +15,7 @@ class GistContent extends Component {
 
   getFiles () {
     let gist = this.props.gist
-    if (!gist.id) return <div>no content</div>
+    if (!gist.description) return <div>no content</div>
     return Object.keys(gist.files).map((filename, i) => {
 
       let file = gist.files[filename]
@@ -34,7 +35,8 @@ class GistContent extends Component {
     let gist = this.props.gist
     return (
       <div className="gist">
-        <h3>{gist.description}</h3>
+        <h3>{gist.description} {gist.deleted ? '--removed--': ''}</h3>
+        <button className="btn" onClick={this.props.onGistDelete(gist.id)}>remove gist</button>
         <div className="gist-files" ref="files">
           {this.getFiles()}
         </div>
@@ -68,8 +70,10 @@ const mapDispatch = dispatch => ({
     dispatch(fileAdd())
   },
   onFileContentChange: filename => content => {
-    console.log(filename, content)
     dispatch(fileContentChange(filename, content))
+  },
+  onGistDelete: id => e => {
+    dispatch(gistDelete(id))
   }
 })
 

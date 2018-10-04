@@ -10,6 +10,7 @@ const headers = () => ({
 
 export const prepareJsonFetch = method => path => url => {
   url = url || makeUrl(path)
+  console.log(url)
   return fetch(url, {
       method,
       headers: headers(),

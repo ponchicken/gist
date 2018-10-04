@@ -15,12 +15,13 @@ class Gists extends Component {
   displayGists = () => {
     let gists = this.props.gists.data
     if (gists.length) {
-      return gists.map(gist => {
+      return gists.map((gist, i) => {
+        if (!gist.description) return <div key={i}>hmm</div> 
         let name = parseTitle(gist.description)
         return (
           <button 
             onClick={this.props.setGist(gist)} 
-            key={gist.id}
+            key={i}
             className={this.chooseGistClass(gist)}
           >
             { name.title }

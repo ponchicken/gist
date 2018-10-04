@@ -5,6 +5,7 @@ import Gists from './containers/Gists';
 import Gist from './containers/Gist';
 import User from './containers/User';
 import Sync from './containers/Sync';
+import AddGist from './containers/AddGist'
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
         <div className="app">
           <header className="header">
             <Sync />
+            <AddGist />
             <User />
           </header>
           <aside className="side-gists">
