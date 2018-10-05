@@ -15,7 +15,8 @@ import {
   FILE_RENAME,
   FILE_CONTENT_CHANGE,
   GIST_ADD,
-  GIST_DELETE
+  GIST_DELETE,
+  GIST_RENAME
 } from '../constant'
 
 
@@ -89,6 +90,11 @@ export const gistAdd = (gist) => ({
 export const gistDelete = (id) => ({
   type: GIST_DELETE,
   payload: id
+})
+
+export const gistRename = (name) => ({
+  type: GIST_RENAME,
+  payload: name
 })
 
 export const loadGistFiles = gist => dispatch => {

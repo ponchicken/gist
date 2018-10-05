@@ -7,7 +7,8 @@ import {
   fileRemove,
   fileAdd,
   fileContentChange,
-  gistDelete
+  gistDelete,
+  gistRename
 } from '../actions/gist'
 
 class GistContent extends Component {
@@ -36,6 +37,9 @@ class GistContent extends Component {
     return (
       <div className="gist">
         <h3>{gist.description} {gist.deleted ? '--removed--': ''}</h3>
+        <div>
+          <textarea value={gist.description} onChange={this.props.onGistRename}></textarea>
+        </div>
         <button className="btn" onClick={this.props.onGistDelete(gist.id)}>remove gist</button>
         <div className="gist-files" ref="files">
           {this.getFiles()}
@@ -74,6 +78,9 @@ const mapDispatch = dispatch => ({
   },
   onGistDelete: id => e => {
     dispatch(gistDelete(id))
+  },
+  onGistRename: e => {
+    dispatch(gistRename(e.target.value))
   }
 })
 

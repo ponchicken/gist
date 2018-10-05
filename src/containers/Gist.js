@@ -70,7 +70,11 @@ const mapDispatch = dispatch => ({
       let file = gist.files[key]
       if (file && !file.content) delete gist.files[key]
     })
-    dispatch(changeGist(gist))
+    if (gist.files.length) {
+      dispatch(changeGist(gist))
+    } else {
+      console.log('No files in gist')
+    }
   },
   onAddGist: gist => {
     dispatch(gistAdd(gist))

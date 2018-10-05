@@ -4,7 +4,8 @@ import {
   FILE_REMOVE,
   FILE_RENAME,
   FILE_CONTENT_CHANGE,
-  NEW_GIST
+  NEW_GIST,
+  GIST_RENAME
 } from '../constant'
 
 import { createReducer } from '../helpers/createReducers'
@@ -59,11 +60,19 @@ export const fileContentChange = (state, action) => {
   return gist
 }
 
+export const gistRename = (state, action) => {
+  let gist = {...state}
+  let name = action.payload
+  gist.description = name
+  return gist
+}
+
 export const gist = createReducer(defaultState, {
   [SET_ACTIVE_GIST]: setActiveGist,
   [FILE_ADD]: fileAdd,
   [FILE_REMOVE]: fileRemove,
   [FILE_RENAME]: fileRename,
   [FILE_CONTENT_CHANGE]: fileContentChange,
-  [NEW_GIST]: newGist
+  [NEW_GIST]: newGist,
+  [GIST_RENAME]: gistRename
 })

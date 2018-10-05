@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT'
 
 export const GIST_ADD = 'GIST_ADD'
 export const GIST_DELETE = 'GIST_DELETE'
+export const GIST_RENAME = 'GIST_RENAME'
 export const NEW_GIST = 'NEW_GIST'
 export const SET_ACTIVE_GIST = 'SET_ACTIVE_GIST'
 export const CHANGE_GIST = 'CHANGE_GIST'
